@@ -1,0 +1,37 @@
+replicaCount: 1
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+backendImage:
+  repository: granthynd/blog_backend
+  pullPolicy: Always
+  tag: "latest"
+
+frontendImage:
+  repository: granthynd/blog_frontend
+  pullPolicy: Always
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  backend:
+    externalPort: 8000
+    internalPort: 8000
+    internalPortName: backend-http
+  frontend:
+    externalPort: 3000
+    internalPort: 3000
+    internalPortName: frontend-http
+
+ingress:
+  enabled: true
+  hosts:
+    - host: backend.granthynd.com
+      paths:
+        - path: /
+          port: 8000
+    - host: granthynd.com
+      paths:
+        - path: /
+          port: 3000
