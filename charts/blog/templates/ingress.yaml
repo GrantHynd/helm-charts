@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 
 metadata:
-  name: {{ include "blog.fullName" }}
+  name: {{ include "blog.fullName" . }}
   labels:
     {{- include "blog.labels" . | nindent 4 }}
   annotations:
@@ -28,7 +28,7 @@ spec:
         {{- range .paths }}
           - path: {{ .path }}
             backend:
-              serviceName: {{ include "blog.fullName" }}
+              serviceName: {{ include "blog.fullName" . }}
               servicePort: {{ .port }}
         {{- end }}
   {{- end }}
