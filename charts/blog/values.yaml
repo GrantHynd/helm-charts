@@ -42,10 +42,12 @@ ingress:
     - host: backend.granthynd.com
       paths:
         - path: /
+          pathType: ImplementationSpecific
           port: 8000
     - host: granthynd.com
       paths:
         - path: /
+          pathType: ImplementationSpecific
           port: 3000
   tls: []
 
