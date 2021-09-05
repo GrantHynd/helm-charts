@@ -48,14 +48,6 @@ spec:
             - name: {{ .Values.service.frontend.internalPortName }}
               containerPort: {{ .Values.service.frontend.internalPort }}
               protocol: TCP 
-          livenessProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.frontend.internalPortName }}
-          readinessProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.frontend.internalPortName }}
           resources:
             {{- toYaml .Values.resources.frontend | nindent 12 }}
       {{- with .Values.nodeSelector }}
