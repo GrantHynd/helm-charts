@@ -7,7 +7,9 @@ metadata:
     {{- include "blog.labels" . | nindent 4 }}
 
 spec:
+  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "blog.selectorLabels" . | nindent 6 }}
@@ -20,6 +22,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      serviceAccountName: {{ include "blog.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}-backend
           securityContext:
@@ -33,12 +36,7 @@ spec:
               containerPort: { { .Values.service.backend.internalPort } }
               protocol: TCP
           resources:
-            limits:
-              cpu: 300m
-              memory: 300Mi
-            requests:
-              cpu: 200m
-              memory: 200Mi
+            {{- toYaml .Values.resources.backend | nindent 12 }}
         - name: {{ .Chart.Name }}-frontend
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
@@ -54,20 +52,21 @@ spec:
             httpGet:
               path: /
               port: { { .Values.service.frontend.internalPortName } }
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            failureThreshold: 3
           readinessProbe:
             httpGet:
               path: /
               port: { { .Values.service.frontend.internalPortName } }
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            failureThreshold: 3
           resources:
-            limits:
-              cpu: 100m
-              memory: 100Mi
-            requests:
-              cpu: 50m
-              memory: 50Mi
+            {{- toYaml .Values.resources.frontend | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

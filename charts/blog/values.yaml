@@ -3,6 +3,16 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+
 backendImage:
   repository: granthynd/blog_backend
   pullPolicy: Always
@@ -25,7 +35,9 @@ service:
     internalPortName: frontend-http
 
 ingress:
-  enabled: true
+  enabled: false
+  className: ""
+  annotations: {}
   hosts:
     - host: backend.granthynd.com
       paths:
@@ -35,3 +47,28 @@ ingress:
       paths:
         - path: /
           port: 3000
+  tls: []
+
+resources:
+  backend:
+    limits:
+      cpu: 300m
+      memory: 300Mi
+    requests:
+      cpu: 200m
+      memory: 200Mi
+  frontend:
+    limits:
+      cpu: 100m
+      memory: 100Mi
+    requests:
+      cpu: 50m
+      memory: 50Mi
+
+securityContext: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
