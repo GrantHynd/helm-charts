@@ -32,8 +32,8 @@ spec:
           stdin: true
           tty: true
           ports:
-            - name: { { .Values.service.backend.internalPortName } }
-              containerPort: { { .Values.service.backend.internalPort } }
+            - name: {{ .Values.service.backend.internalPortName }}
+              containerPort: {{ .Values.service.backend.internalPort }}
               protocol: TCP
           resources:
             {{- toYaml .Values.resources.backend | nindent 12 }}
@@ -45,17 +45,17 @@ spec:
           stdin: true
           tty: true
           ports:
-            - name: { { .Values.service.frontend.internalPortName } }
-              containerPort: { { .Values.service.frontend.internalPort } }
+            - name: {{ .Values.service.frontend.internalPortName }}
+              containerPort: {{ .Values.service.frontend.internalPort }}
               protocol: TCP 
           livenessProbe:
             httpGet:
               path: /
-              port: { { .Values.service.frontend.internalPortName } }
+              port: {{ .Values.service.frontend.internalPortName }}
           readinessProbe:
             httpGet:
               path: /
-              port: { { .Values.service.frontend.internalPortName } }
+              port: {{ .Values.service.frontend.internalPortName }}
           resources:
             {{- toYaml .Values.resources.frontend | nindent 12 }}
       {{- with .Values.nodeSelector }}
