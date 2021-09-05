@@ -35,7 +35,7 @@ service:
     internalPortName: frontend-http
 
 ingress:
-  enabled: false
+  enabled: true
   className: "nginx"
   annotations: {}
   hosts:
