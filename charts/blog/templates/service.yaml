@@ -3,7 +3,8 @@ kind: Service
 
 metadata:
   name: {{ include "blog.fullname" . }}
-  labels: {{ include "blog.labels" . | nindent 4 }}
+  labels: 
+    {{- include "blog.labels" . | nindent 4 }}
 
 spec:
   type: {{ .Values.service.type }}
@@ -16,4 +17,5 @@ spec:
       targetPort: {{ .Values.service.frontend.internalPort }}
       protocol: TCP
       name: frontend-service
-  selector: {{ - include "blog.selectorLabels" . | nindent 4 }}
+  selector: 
+    {{- include "blog.selectorLabels" . | nindent 4 }}
