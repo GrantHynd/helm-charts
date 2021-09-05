@@ -3,7 +3,7 @@ kind: Service
 
 metadata:
   name: {{ include "blog.fullname" . }}
-  labels: {{ - include "blog.labels" . | nindent 4 }}
+  labels: {{ include "blog.labels" . | nindent 4 }}
 
 spec:
   type: {{ .Values.service.type }}
