@@ -29,8 +29,6 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.backendImage.repository }}:{{ .Values.backendImage.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.backendImage.pullPolicy }}
-          stdin: true
-          tty: true
           ports:
             - name: {{ .Values.service.backend.internalPortName }}
               containerPort: {{ .Values.service.backend.internalPort }}
@@ -42,6 +40,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.frontendImage.repository }}:{{ .Values.frontendImage.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.frontendImage.pullPolicy }}
+          args: ["serve", "-s", "-l", "{{ .Values.service.frontend.internalPort }}", "build"]
           stdin: true
           tty: true
           ports:
