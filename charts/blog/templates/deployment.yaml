@@ -29,6 +29,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.backendImage.repository }}:{{ .Values.backendImage.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.backendImage.pullPolicy }}
+          args: ["python manage.py runserver 0.0.0.0:{{ .Values.service.backend.internalPort }}"]
           ports:
             - name: {{ .Values.service.backend.internalPortName }}
               containerPort: {{ .Values.service.backend.internalPort }}
