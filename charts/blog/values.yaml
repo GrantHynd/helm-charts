@@ -26,11 +26,11 @@ frontendImage:
 service:
   type: ClusterIP
   backend:
-    externalPort: 80
+    externalPort: 8000
     internalPort: 8000
     internalPortName: backend-http
   frontend:
-    externalPort: 80
+    externalPort: 3000
     internalPort: 3000
     internalPortName: frontend-http
 
