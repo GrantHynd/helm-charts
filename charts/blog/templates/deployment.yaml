@@ -29,7 +29,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.backendImage.repository }}:{{ .Values.backendImage.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.backendImage.pullPolicy }}
-          args: ["gunicorn", "-w", "3", "-b", "0.0.0.0:{{ .Values.service.backend.internalPort }}", "blog.asgi:application"]
+          args: ["gunicorn", "-w", "3", "-b", "0.0.0.0:{{ .Values.service.backend.internalPort }}", "blog.wsgi:application"]
           ports:
             - name: {{ .Values.service.backend.internalPortName }}
               containerPort: {{ .Values.service.backend.internalPort }}
