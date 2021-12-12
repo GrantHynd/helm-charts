@@ -24,7 +24,7 @@ frontendImage:
   tag: "latest"
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   backend:
     externalPort: 8000
     internalPort: 8000
