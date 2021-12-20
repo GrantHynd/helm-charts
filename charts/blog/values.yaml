@@ -36,18 +36,18 @@ service:
 
 ingress:
   enabled: true
-  className: ""
+  className: "nginx"
   annotations: {}
   hosts:
     - host: backend.granthynd.com
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
           port: 8000
     - host: granthynd.com
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
           port: 3000
   tls: []
 
