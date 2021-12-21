@@ -37,7 +37,8 @@ service:
 ingress:
   enabled: true
   className: "nginx"
-  annotations: {}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
   hosts:
     - host: backend.granthynd.com
       paths:
@@ -53,7 +54,7 @@ ingress:
     - hosts:
         - backend.granthynd.com
         - granthynd.com
-      secretName: ingress-secret
+      secretName: letsencrypt-staging
 
 resources:
   backend:
