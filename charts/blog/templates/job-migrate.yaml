@@ -1,0 +1,52 @@
+apiVersion: batch/v1
+kind: Job
+
+metadata:
+  name: {{ include "blog.fullname" . }}-prepare
+  labels:
+    {{- include "blog.labels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ include "blog.name" . }}-prepare
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-weight: "-1"
+    helm.sh/hook-delete-policy: hook-succeeded
+
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      name: {{ include "blog.fullname" . }}-prepare
+      labels:
+        {{- include "blog.selectorLabels" . | nindent 8 }}
+        helm.sh/chart: {{ include "blog.chart" . }}
+    spec:
+      serviceAccountName: {{ include "blog.serviceAccountName" . }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}-migrate
+          image: "{{ .Values.backendImage.repository }}:{{ .Values.backendImage.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backendImage.pullPolicy }}
+          args: [
+            "python",
+            "manage.py",
+            "migrate",
+            "--noinput"
+          ]
+          resources:
+            {{- toYaml .Values.resources.backend | nindent 12 }}
+      restartPolicy: Never
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+        tolerations:
+          {{- toYaml . | nindent 8 }}
+      {{- end }}
