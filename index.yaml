@@ -3,6 +3,16 @@ entries:
   blog:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2021-12-28T23:32:22.164550481Z"
+    description: A Helm chart for the deploying the blog application
+    digest: 85a6a530e5c6b8066bb62f2978b8bf40c45ac826bc6236598185685b59057468
+    name: blog
+    type: application
+    urls:
+    - https://github.com/GrantHynd/helm-charts/releases/download/blog-0.32.0/blog-0.32.0.tgz
+    version: 0.32.0
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2021-12-26T18:31:04.028946207Z"
     description: A Helm chart for the deploying the blog application
     digest: c612079fb93bf493a4617198ed7cdf48b4324756660bf2d2d241b523f65adc5f
@@ -311,4 +321,4 @@ entries:
     urls:
     - https://github.com/GrantHynd/helm-charts/releases/download/blog-0.1.0/blog-0.1.0.tgz
     version: 0.1.0
-generated: "2021-12-26T18:31:04.029231033Z"
+generated: "2021-12-28T23:32:22.164846285Z"
