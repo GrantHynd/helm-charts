@@ -86,3 +86,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# Misc env vars
+backendDomain: ${BACKEND_DOMAIN}
+frontendDomain: ${FRONTEND_DOMAIN}

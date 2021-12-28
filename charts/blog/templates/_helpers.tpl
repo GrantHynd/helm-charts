@@ -75,4 +75,8 @@ Environment variables that are injected during chart deployment.
     value: "{{ .Values.database.user }}"
   - name: DB_PASSWORD
     value: "{{ .Values.database.password }}"
+  - name: BACKEND_DOMAIN
+    value: "{{ .Values.backendDomain }}"
+  - name: FRONTEND_DOMAIN
+    value: "{{ .Values.frontendDomain }}"
 {{- end -}}
