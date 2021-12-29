@@ -23,13 +23,6 @@ frontendImage:
   pullPolicy: Always
   tag: "latest"
 
-database:
-  host: $DB_HOST
-  port: $DB_PORT
-  name: $DB_NAME
-  user: $DB_USER
-  password: $DB_PASSWORD
-
 service:
   type: ClusterIP
   backend:
@@ -79,6 +72,9 @@ resources:
       cpu: 50m
       memory: 50Mi
 
+# Backend secret vars supplied by CI
+backend-env-vars: {}
+
 securityContext: {}
 
 nodeSelector: {}
@@ -86,7 +82,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-# Misc env vars
-backendDomain: ${BACKEND_DOMAIN}
-frontendDomain: ${FRONTEND_DOMAIN}

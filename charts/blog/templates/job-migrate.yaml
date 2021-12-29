@@ -29,7 +29,11 @@ spec:
         - name: {{ .Chart.Name }}-migrate
           image: "{{ .Values.backendImage.repository }}:{{ .Values.backendImage.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.backendImage.pullPolicy }}
-          env: {{- include "blog.env-vars" . | nindent 8 }}
+          env:
+            {{- range .Values.backend-env-vars }}
+            - name: {{ .name }}
+              value: {{ .value }}
+            {{- end }}
           args: [
             "python",
             "manage.py",

@@ -60,23 +60,3 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
-
-{{/*
-Environment variables that are injected during chart deployment.
-*/}}
-{{- define "blog.env-vars" }}
-  - name: DB_HOST
-    value: "{{ .Values.database.host }}"
-  - name: DB_PORT
-    value: "{{ .Values.database.port }}"
-  - name: DB_NAME
-    value: "{{ .Values.database.name }}"
-  - name: DB_USER
-    value: "{{ .Values.database.user }}"
-  - name: DB_PASSWORD
-    value: "{{ .Values.database.password }}"
-  - name: BACKEND_DOMAIN
-    value: "{{ .Values.backendDomain }}"
-  - name: FRONTEND_DOMAIN
-    value: "{{ .Values.frontendDomain }}"
-{{- end -}}
