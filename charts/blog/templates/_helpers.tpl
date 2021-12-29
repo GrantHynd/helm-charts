@@ -66,9 +66,9 @@ Environment variables that are injected during chart deployment.
 */}}
 {{- define "blog.env-vars" }}
   - name: DB_HOST
-    value: {{ .Values.database.host }}
+    value: "{{ .Values.database.host }}"
   - name: DB_PORT
-    value: {{ .Values.database.port }}
+    value: "{{ .Values.database.port }}"
   - name: DB_NAME
     value: "{{ .Values.database.name }}"
   - name: DB_USER
