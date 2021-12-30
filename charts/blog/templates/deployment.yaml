@@ -30,7 +30,7 @@ spec:
           image: "{{ .Values.backendImage.repository }}:{{ .Values.backendImage.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.backendImage.pullPolicy }}
           env: 
-            {{- range .Values.backend-env-vars }}
+            {{- range .Values.backendEnvVars }}
             - name: {{ .name }}
               value: {{ .value }}
             {{- end }}

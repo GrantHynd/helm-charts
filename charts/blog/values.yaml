@@ -73,7 +73,7 @@ resources:
       memory: 50Mi
 
 # Backend secret vars supplied by CI
-backend-env-vars: {}
+backendEnvVars: {}
 
 securityContext: {}
 
