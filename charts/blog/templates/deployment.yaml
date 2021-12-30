@@ -32,7 +32,7 @@ spec:
           env: 
             {{- range .Values.backendEnvVars }}
             - name: {{ .name }}
-              value: {{ .value }}
+              value: {{ .value | quote }}
             {{- end }}
           args: ["gunicorn", "-w", "3", "-b", "0.0.0.0:{{ .Values.service.backend.internalPort }}", "blog.wsgi:application"]
           ports:

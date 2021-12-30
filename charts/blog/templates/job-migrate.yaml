@@ -32,7 +32,7 @@ spec:
           env:
             {{- range .Values.backendEnvVars }}
             - name: {{ .name }}
-              value: {{ .value }}
+              value: {{ .value | quote }}
             {{- end }}
           args: [
             "python",
